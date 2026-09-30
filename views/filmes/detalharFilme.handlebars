@@ -1,0 +1,60 @@
+
+<div class="container">
+    <h3>Detalhes do Filme</h3>
+
+    <div class="card">
+        <div class="card-content">
+
+            <span class="card-title">
+                {{filme.titulo}}
+            </span>
+
+            <p>
+                <b>ID:</b> {{filme.id}}
+            </p>
+
+            <p>
+                <b>Ano:</b> {{filme.ano}}
+            </p>
+
+            <p>
+                <b>Sinopse:</b> {{filme.sinopse}}
+            </p>
+
+            <h5>Diretor</h5>
+
+            <p>{{filme.diretor.nome}}</p>
+
+            <h5>Ficha Técnica</h5>
+
+            {{#if filme.fichaTecnica}}
+                <p>
+                    Duração:
+                    {{filme.fichaTecnica.duracao}}
+                    minutos
+                </p>
+            {{else}}
+                <p>Ficha técnica não cadastrada.</p>
+            {{/if}}
+
+            <h5>Artistas</h5>
+
+            <ul class="collection">
+                {{#each filme.artistas}}
+                <li class="collection-item">
+                    {{nome}}
+                </li>
+                {{else}}
+                <li class="collection-item">
+                    Nenhum artista cadastrado.
+                </li>
+                {{/each}}
+            </ul>
+
+        </div>
+    </div>
+
+    <a href="/filmes" class="btn blue">
+        Voltar
+    </a>
+</div>

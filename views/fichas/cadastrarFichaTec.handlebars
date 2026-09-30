@@ -1,0 +1,62 @@
+
+<div class="container">
+    <h3>Cadastrar Ficha Técnica</h3>
+
+    <div class="card">
+        <div class="card-content">
+
+            <form action="/fichas"
+                  method="POST">
+
+                <div class="input-field">
+                    <select name="filmeId"
+                            id="filmeId"
+                            required>
+
+                        <option value=""
+                                disabled selected>
+                            Selecione um filme
+                        </option>
+
+                        {{#each filmes}}
+                        <option value="{{id}}">
+                            {{titulo}}
+                        </option>
+                        {{/each}}
+
+                    </select>
+
+                    <label for="filmeId">
+                        Filme
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="number"
+                        name="duracao"
+                        id="duracao"
+                        min="1"
+                        required>
+
+                    <label for="duracao">
+                        Duração (minutos)
+                    </label>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn green">
+                    Cadastrar
+                </button>
+
+                <a href="/fichas"
+                   class="btn grey">
+                    Voltar
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+</div>

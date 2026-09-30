@@ -1,0 +1,43 @@
+
+<div class="container">
+    <h3>Lista de Filmes</h3>
+
+    <a href="/filmes/cadastrar"
+       class="btn blue">
+        Cadastrar Filme
+    </a>
+
+    <table class="striped highlight">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Ano</th>
+                <th>Diretor</th>
+                <th>Detalhes</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each filmes}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{titulo}}</td>
+                <td>{{ano}}</td>
+                <td>{{diretor.nome}}</td>
+                <td>
+                    <a href="/filmes/{{id}}">
+                        Visualizar
+                    </a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="5">
+                    Nenhum filme cadastrado.
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

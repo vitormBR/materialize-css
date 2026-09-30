@@ -1,0 +1,35 @@
+
+<div class="container">
+    <h3>Lista de Artistas</h3>
+
+    <a href="/artistas/cadastrar"
+       class="btn blue">
+        Cadastrar Artista
+    </a>
+
+    <table class="striped highlight">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Nacionalidade</th>
+                <th>Detalhes</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each artistas}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{nome}}</td>
+                <td>{{nacionalidade}}</td>
+                <td>
+                    <a href="/artistas/{{id}}">
+                        Visualizar
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,1 @@
+const relacionamentos = require('./models/relacionamentos');

@@ -1,0 +1,35 @@
+
+<div class="container">
+    <h3>Lista de Diretores</h3>
+
+    <a href="/diretores/cadastrar"
+       class="btn blue">
+        Cadastrar Diretor
+    </a>
+
+    <table class="striped highlight">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Nacionalidade</th>
+                <th>Detalhes</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each diretores}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{nome}}</td>
+                <td>{{nacionalidade}}</td>
+                <td>
+                    <a href="/diretores/{{id}}">
+                        Visualizar
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

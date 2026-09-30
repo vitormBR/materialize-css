@@ -1,0 +1,105 @@
+
+<div class="container">
+    <h3>Cadastrar Filme</h3>
+
+    <div class="card">
+        <div class="card-content">
+
+            <form action="/filmes" method="POST">
+
+                <div class="input-field">
+                    <input
+                        type="text"
+                        name="titulo"
+                        id="titulo"
+                        required>
+
+                    <label for="titulo">
+                        Título
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="number"
+                        name="ano"
+                        id="ano"
+                        required>
+
+                    <label for="ano">
+                        Ano
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <textarea
+                        name="sinopse"
+                        id="sinopse"
+                        class="materialize-textarea">
+                    </textarea>
+
+                    <label for="sinopse">
+                        Sinopse
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <select name="diretorId"
+                            id="diretorId"
+                            required>
+
+                        <option value="" disabled selected>
+                            Selecione um diretor
+                        </option>
+
+                        {{#each diretores}}
+                        <option value="{{id}}">
+                            {{nome}}
+                        </option>
+                        {{/each}}
+
+                    </select>
+
+                    <label for="diretorId">
+                        Diretor
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <select name="artistas"
+                            id="artistas"
+                            multiple>
+
+                        <option value="" disabled>
+                            Selecione os artistas
+                        </option>
+
+                        {{#each artistas}}
+                        <option value="{{id}}">
+                            {{nome}}
+                        </option>
+                        {{/each}}
+
+                    </select>
+
+                    <label for="artistas">
+                        Artistas
+                    </label>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn green">
+                    Cadastrar
+                </button>
+
+                <a href="/filmes"
+                   class="btn grey">
+                    Voltar
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+</div>
