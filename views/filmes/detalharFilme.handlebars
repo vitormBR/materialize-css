@@ -1,123 +1,82 @@
 <div class="container">
-    <h3>Detalhes do Filme</h3>
+    <div class="page-header">
+        <h3>Detalhes do Filme</h3>
+        <p>Informações completas do filme.</p>
+    </div>
 
     <div class="card">
         <div class="card-content">
+            <span class="card-title">{{filme.titulo}}</span>
 
-            <span class="card-title">
-                {{filme.titulo}}
-            </span>
-
-            <p>
-                <b>ID:</b> {{filme.id}}
-            </p>
-
-            <p>
-                <b>Título:</b>
-                {{filme.titulo}}
-            </p>
-
-            <p>
-                <b>Ano:</b>
-                {{filme.ano}}
-            </p>
-
-            <p>
-                <b>Sinopse:</b>
-                {{filme.sinopse}}
-            </p>
-
-            <p>
-                <b>Duração:</b>
-                {{filme.duracao}} minutos
-            </p>
-
-            <p>
-                <b>Gênero:</b>
-                {{filme.genero}}
-            </p>
-
-            <p>
-                <b>Classificação Indicativa:</b>
-                {{filme.clasIndicativa}}
-            </p>
-
-            <p>
-                <b>País de Origem:</b>
-                {{filme.paisOrigem}}
-            </p>
+            <div class="detail-item">
+                <div class="detail-label">ID</div>
+                <div class="detail-value">{{filme.id}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Ano</div>
+                <div class="detail-value">{{filme.ano}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Sinopse</div>
+                <div class="detail-value">{{filme.sinopse}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Duração</div>
+                <div class="detail-value">{{filme.duracao}} minutos</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Gênero</div>
+                <div class="detail-value">{{filme.genero}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Classificação Indicativa</div>
+                <div class="detail-value">{{filme.clasIndicativa}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">País de Origem</div>
+                <div class="detail-value">{{filme.paisOrigem}}</div>
+            </div>
 
             <h5>Diretor</h5>
-
             {{#if filme.diretor}}
-                <p>
-                    <b>Nome:</b>
-                    {{filme.diretor.nome}}
-                </p>
+                <p>{{filme.diretor.nome}}</p>
             {{else}}
                 <p>Diretor não cadastrado.</p>
             {{/if}}
 
             <h5>Ficha Técnica</h5>
-
             {{#if filme.fichaTecnica}}
-
-                <p>
-                    <b>Roteirista:</b>
-                    {{filme.fichaTecnica.roteirista}}
-                </p>
-
-                <p>
-                    <b>Produtor:</b>
-                    {{filme.fichaTecnica.produtor}}
-                </p>
-
-                <p>
-                    <b>Compositor:</b>
-                    {{filme.fichaTecnica.compositor}}
-                </p>
-
-                <p>
-                    <b>Editor:</b>
-                    {{filme.fichaTecnica.editor}}
-                </p>
-
-                <p>
-                    <b>Duração:</b>
-                    {{filme.fichaTecnica.duracao}} minutos
-                </p>
-
-                <p>
-                    <b>Orçamento:</b>
-                    {{filme.fichaTecnica.orcamento}}
-                </p>
-
+                <div class="row">
+                    <div class="col s12 m6">
+                        <p><b>Roteirista:</b> {{filme.fichaTecnica.roteirista}}</p>
+                        <p><b>Produtor:</b> {{filme.fichaTecnica.produtor}}</p>
+                        <p><b>Compositor:</b> {{filme.fichaTecnica.compositor}}</p>
+                    </div>
+                    <div class="col s12 m6">
+                        <p><b>Editor:</b> {{filme.fichaTecnica.editor}}</p>
+                        <p><b>Duração:</b> {{filme.fichaTecnica.duracao}} minutos</p>
+                        <p><b>Orçamento:</b> {{filme.fichaTecnica.orcamento}}</p>
+                    </div>
+                </div>
             {{else}}
-
-                <p>
-                    Ficha técnica não cadastrada.
-                </p>
-
+                <p>Ficha técnica não cadastrada.</p>
             {{/if}}
 
             <h5>Artistas</h5>
-
             <ul class="collection">
                 {{#each filme.artistas}}
-                <li class="collection-item">
-                    {{nome}}
-                </li>
+                    <li class="collection-item">{{nome}}</li>
                 {{else}}
-                <li class="collection-item">
-                    Nenhum artista cadastrado.
-                </li>
+                    <li class="collection-item">Nenhum artista cadastrado.</li>
                 {{/each}}
             </ul>
-
         </div>
     </div>
 
-    <a href="/filmes" class="btn blue">
-        Voltar
-    </a>
+    <div class="action-buttons">
+        <a href="/filmes" class="btn grey">
+            <i class="material-icons left">arrow_back</i>
+            Voltar
+        </a>
+    </div>
 </div>

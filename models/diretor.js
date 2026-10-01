@@ -8,19 +8,15 @@ const Diretor = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
-
         foto: {
             type: DataTypes.STRING
         },
-
         dataNascimento: {
             type: DataTypes.DATE
         },
-
         biografia: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
-
         nacionalidade: {
             type: DataTypes.STRING
         }

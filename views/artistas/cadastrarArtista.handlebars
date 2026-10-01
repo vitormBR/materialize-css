@@ -1,18 +1,16 @@
 <div class="container">
-    <h3>Cadastrar Artista</h3>
+    <div class="page-header">
+        <h3>Cadastrar Artista</h3>
+        <p>Preencha as informações do artista.</p>
+    </div>
 
-    <div class="card">
+    <div class="card form-card">
         <div class="card-content">
 
             <form action="/artistas" method="POST">
 
                 <div class="input-field">
-                    <input
-                        type="text"
-                        name="nome"
-                        id="nome"
-                        required>
-
+                    <input type="text" name="nome" id="nome" required>
                     <label for="nome">Nome</label>
                 </div>
 
@@ -21,10 +19,7 @@
                         type="text"
                         name="nacionalidade"
                         id="nacionalidade">
-
-                    <label for="nacionalidade">
-                        Nacionalidade
-                    </label>
+                    <label for="nacionalidade">Nacionalidade</label>
                 </div>
 
                 <div class="input-field">
@@ -32,9 +27,8 @@
                         type="date"
                         name="dataNascimento"
                         id="dataNascimento">
-
-                    <label class="active" for="dataNascimento">
-                        Data de nascimento
+                    <label for="dataNascimento" class="active">
+                        Data de Nascimento
                     </label>
                 </div>
 
@@ -43,43 +37,24 @@
                         name="biografia"
                         id="biografia"
                         class="materialize-textarea"></textarea>
-
-                    <label for="biografia">
-                        Biografia
-                    </label>
+                    <label for="biografia">Biografia</label>
                 </div>
 
                 <div class="input-field">
-                    <input
-                        type="text"
-                        name="tipo"
-                        id="tipo">
-
-                    <label for="tipo">
-                        Tipo
-                    </label>
+                    <input type="text" name="tipo" id="tipo">
+                    <label for="tipo">Tipo</label>
                 </div>
 
                 <div class="input-field">
-                    <textarea
-                        name="papeis"
-                        id="papeis"
-                        class="materialize-textarea"></textarea>
-
-                    <label for="papeis">
-                        Papéis
-                    </label>
+                    <input type="text" name="papeis" id="papeis">
+                    <label for="papeis">Papéis</label>
                 </div>
 
-                <button
-                    type="submit"
-                    class="btn green">
+                <button type="submit" class="btn green">
                     Cadastrar
                 </button>
 
-                <a
-                    href="/artistas"
-                    class="btn grey">
+                <a href="/artistas" class="btn grey">
                     Voltar
                 </a>
 

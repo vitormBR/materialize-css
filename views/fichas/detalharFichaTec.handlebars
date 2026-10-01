@@ -1,57 +1,30 @@
 <div class="container">
-    <h3>Detalhes da Ficha Técnica</h3>
+    <div class="page-header">
+        <h3>Detalhes da Ficha Técnica</h3>
+        <p>Informações técnicas do filme.</p>
+    </div>
 
     <div class="card">
         <div class="card-content">
-
             <span class="card-title">
-                Ficha Técnica
+                {{#if ficha.filme}}{{ficha.filme.titulo}}{{else}}Ficha Técnica{{/if}}
             </span>
 
-            <p>
-                <b>ID:</b>
-                {{ficha.id}}
-            </p>
-
-            <p>
-                <b>Filme:</b>
-                {{ficha.filme.titulo}}
-            </p>
-
-            <p>
-                <b>Roteirista:</b>
-                {{ficha.roteirista}}
-            </p>
-
-            <p>
-                <b>Produtor:</b>
-                {{ficha.produtor}}
-            </p>
-
-            <p>
-                <b>Compositor:</b>
-                {{ficha.compositor}}
-            </p>
-
-            <p>
-                <b>Editor:</b>
-                {{ficha.editor}}
-            </p>
-
-            <p>
-                <b>Duração:</b>
-                {{ficha.duracao}} minutos
-            </p>
-
-            <p>
-                <b>Orçamento:</b>
-                {{ficha.orcamento}}
-            </p>
-
+            <div class="detail-item"><div class="detail-label">ID</div><div class="detail-value">{{ficha.id}}</div></div>
+            <div class="detail-item"><div class="detail-label">Filme</div><div class="detail-value">{{#if ficha.filme}}{{ficha.filme.titulo}}{{else}}-{{/if}}</div></div>
+            <div class="detail-item"><div class="detail-label">Roteirista</div><div class="detail-value">{{ficha.roteirista}}</div></div>
+            <div class="detail-item"><div class="detail-label">Produtor</div><div class="detail-value">{{ficha.produtor}}</div></div>
+            <div class="detail-item"><div class="detail-label">Compositor</div><div class="detail-value">{{ficha.compositor}}</div></div>
+            <div class="detail-item"><div class="detail-label">Editor</div><div class="detail-value">{{ficha.editor}}</div></div>
+            <div class="detail-item"><div class="detail-label">Duração</div><div class="detail-value">{{ficha.duracao}} minutos</div></div>
+            <div class="detail-item"><div class="detail-label">Orçamento</div><div class="detail-value">{{ficha.orcamento}}</div></div>
         </div>
     </div>
 
-    <a href="/ficha-tecnica" class="btn blue">
-        Voltar
-    </a>
+    <div class="action-buttons">
+        <a href="/ficha-tecnica" class="btn grey">
+            <i class="material-icons left">arrow_back</i>
+            Voltar
+        </a>
+    </div>
 </div>

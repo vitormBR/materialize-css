@@ -8,23 +8,18 @@ const Artista = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
-
         nacionalidade: {
             type: DataTypes.STRING
         },
-
         dataNascimento: {
             type: DataTypes.DATE
         },
-
         biografia: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
-
         tipo: {
             type: DataTypes.STRING
         },
-
         papeis: {
             type: DataTypes.STRING
         }

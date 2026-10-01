@@ -8,33 +8,27 @@ const Filme = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
-
         ano: {
             type: DataTypes.INTEGER
         },
-
         sinopse: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
-
         duracao: {
             type: DataTypes.INTEGER
         },
-
         genero: {
             type: DataTypes.STRING
         },
-
         clasIndicativa: {
             type: DataTypes.INTEGER
         },
-
         paisOrigem: {
             type: DataTypes.STRING
         },
-
         diretorId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            allowNull: true
         }
     },
     {

@@ -1,32 +1,22 @@
 <div class="container">
-    <h3>Cadastrar Filme</h3>
+    <div class="page-header">
+        <h3>Cadastrar Filme</h3>
+        <p>Preencha as informações do filme.</p>
+    </div>
 
-    <div class="card">
+    <div class="card form-card">
         <div class="card-content">
 
             <form action="/filmes" method="POST">
 
                 <div class="input-field">
-                    <input
-                        type="text"
-                        name="titulo"
-                        id="titulo"
-                        required>
-
-                    <label for="titulo">
-                        Título
-                    </label>
+                    <input type="text" name="titulo" id="titulo" required>
+                    <label for="titulo">Título</label>
                 </div>
 
                 <div class="input-field">
-                    <input
-                        type="number"
-                        name="ano"
-                        id="ano">
-
-                    <label for="ano">
-                        Ano
-                    </label>
+                    <input type="number" name="ano" id="ano">
+                    <label for="ano">Ano</label>
                 </div>
 
                 <div class="input-field">
@@ -34,87 +24,66 @@
                         name="sinopse"
                         id="sinopse"
                         class="materialize-textarea"></textarea>
-
-                    <label for="sinopse">
-                        Sinopse
-                    </label>
+                    <label for="sinopse">Sinopse</label>
                 </div>
 
                 <div class="input-field">
-                    <input
-                        type="number"
-                        name="duracao"
-                        id="duracao"
-                        min="1">
-
-                    <label for="duracao">
-                        Duração (minutos)
-                    </label>
+                    <input type="number" name="duracao" id="duracao" min="1">
+                    <label for="duracao">Duração (minutos)</label>
                 </div>
 
                 <div class="input-field">
-                    <input
-                        type="text"
-                        name="genero"
-                        id="genero">
-
-                    <label for="genero">
-                        Gênero
-                    </label>
+                    <input type="text" name="genero" id="genero">
+                    <label for="genero">Gênero</label>
                 </div>
 
                 <div class="input-field">
                     <input
                         type="number"
                         name="clasIndicativa"
-                        id="clasIndicativa">
-
-                    <label for="clasIndicativa">
-                        Classificação indicativa
-                    </label>
+                        id="clasIndicativa"
+                        min="0">
+                    <label for="clasIndicativa">Classificação Indicativa</label>
                 </div>
 
                 <div class="input-field">
-                    <input
-                        type="text"
-                        name="paisOrigem"
-                        id="paisOrigem">
-
-                    <label for="paisOrigem">
-                        País de origem
-                    </label>
+                    <input type="text" name="paisOrigem" id="paisOrigem">
+                    <label for="paisOrigem">País de Origem</label>
                 </div>
 
                 <div class="input-field">
                     <select name="diretorId" id="diretorId">
-
-                        <option
-                            value=""
-                            disabled
-                            selected>
-                            Selecione um diretor
+                        <option value="" selected>
+                            Nenhum diretor
                         </option>
 
                         {{#each diretores}}
-                        <option value="{{id}}">
-                            {{nome}}
-                        </option>
+                            <option value="{{id}}">
+                                {{nome}}
+                            </option>
                         {{/each}}
-
                     </select>
 
-                    <label>Diretor</label>
+                    <label for="diretorId">Diretor</label>
                 </div>
 
-                <button
-                    type="submit"
-                    class="btn green">
+                <div class="input-field">
+                    <select name="artistas" id="artistas" multiple>
+                        {{#each artistas}}
+                            <option value="{{id}}">
+                                {{nome}}
+                            </option>
+                        {{/each}}
+                    </select>
+
+                    <label for="artistas">Artistas</label>
+                </div>
+
+                <button type="submit" class="btn green">
                     Cadastrar
                 </button>
 
-                <a
-                    href="/filmes"
-                    class="btn grey">
+                <a href="/filmes" class="btn grey">
                     Voltar
                 </a>
 

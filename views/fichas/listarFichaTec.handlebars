@@ -1,52 +1,57 @@
 <div class="container">
-    <h3>Lista de Fichas Técnicas</h3>
+    <div class="page-header">
+        <h3>Fichas Técnicas</h3>
+        <p>Informações técnicas dos filmes cadastrados.</p>
+    </div>
 
-    <a href="/ficha-tecnica/cadastrar"
-       class="btn blue">
-        Cadastrar Ficha Técnica
-    </a>
+    <div class="action-buttons">
+        <a href="/ficha-tecnica/cadastrar" class="btn blue darken-2">
+            <i class="material-icons left">add</i>
+            Cadastrar Ficha
+        </a>
+    </div>
 
-    <table class="striped highlight">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Filme</th>
-                <th>Roteirista</th>
-                <th>Produtor</th>
-                <th>Compositor</th>
-                <th>Editor</th>
-                <th>Duração</th>
-                <th>Orçamento</th>
-                <th>Detalhes</th>
-            </tr>
-        </thead>
+    <div class="card table-card">
+        <table class="striped highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Filme</th>
+                    <th>Roteirista</th>
+                    <th>Produtor</th>
+                    <th>Compositor</th>
+                    <th>Editor</th>
+                    <th>Duração</th>
+                    <th>Orçamento</th>
+                    <th>Detalhes</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            {{#each fichasTecnicas}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{filme.titulo}}</td>
-                <td>{{roteirista}}</td>
-                <td>{{produtor}}</td>
-                <td>{{compositor}}</td>
-                <td>{{editor}}</td>
-                <td>{{duracao}} minutos</td>
-                <td>{{orcamento}}</td>
-                <td>
-                    <a href="/ficha-tecnica/{{id}}"
-                       class="btn-small blue">
-                        Visualizar
-                    </a>
-                </td>
-            </tr>
-
-            {{else}}
-            <tr>
-                <td colspan="9">
-                    Nenhuma ficha cadastrada.
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+            <tbody>
+                {{#each fichasTecnicas}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td><b>{{#if filme}}{{filme.titulo}}{{else}}-{{/if}}</b></td>
+                    <td>{{roteirista}}</td>
+                    <td>{{produtor}}</td>
+                    <td>{{compositor}}</td>
+                    <td>{{editor}}</td>
+                    <td>{{duracao}} min</td>
+                    <td>{{orcamento}}</td>
+                    <td>
+                        <a href="/ficha-tecnica/{{id}}" class="btn-small blue">
+                            <i class="material-icons">visibility</i>
+                        </a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="9" class="empty-state">
+                        Nenhuma ficha técnica cadastrada.
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </div>

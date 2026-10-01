@@ -1,37 +1,36 @@
 <div class="container">
-    <h3>Cadastrar Ficha Técnica</h3>
+    <div class="page-header">
+        <h3>Cadastrar Ficha Técnica</h3>
+        <p>Associe a ficha a um filme já cadastrado.</p>
+    </div>
 
-    <div class="card">
+    <div class="card form-card">
         <div class="card-content">
 
-            <form
-                action="/ficha-tecnica"
-                method="POST">
+            <form action="/ficha-tecnica" method="POST">
 
-<div class="input-field">
-    <select name="filmeId" id="filmeId" required>
-        <option value="" disabled selected>
-            Selecione um filme
-        </option>
+                <div class="input-field">
+                    <select name="filmeId" id="filmeId" required>
+                        <option value="" disabled selected>
+                            Selecione um filme
+                        </option>
 
-        {{#each filmes}}
-            <option value="{{id}}">
-                {{titulo}}
-            </option>
-        {{/each}}
-    </select>
+                        {{#each filmes}}
+                            <option value="{{id}}">
+                                {{titulo}}
+                            </option>
+                        {{/each}}
+                    </select>
 
-    <label for="filmeId">Filme</label>
-</div>
+                    <label for="filmeId">Filme</label>
+                </div>
+
                 <div class="input-field">
                     <input
                         type="text"
                         name="roteirista"
                         id="roteirista">
-
-                    <label for="roteirista">
-                        Roteirista
-                    </label>
+                    <label for="roteirista">Roteirista</label>
                 </div>
 
                 <div class="input-field">
@@ -39,10 +38,7 @@
                         type="text"
                         name="produtor"
                         id="produtor">
-
-                    <label for="produtor">
-                        Produtor
-                    </label>
+                    <label for="produtor">Produtor</label>
                 </div>
 
                 <div class="input-field">
@@ -50,10 +46,7 @@
                         type="text"
                         name="compositor"
                         id="compositor">
-
-                    <label for="compositor">
-                        Compositor
-                    </label>
+                    <label for="compositor">Compositor</label>
                 </div>
 
                 <div class="input-field">
@@ -61,10 +54,7 @@
                         type="text"
                         name="editor"
                         id="editor">
-
-                    <label for="editor">
-                        Editor
-                    </label>
+                    <label for="editor">Editor</label>
                 </div>
 
                 <div class="input-field">
@@ -73,10 +63,7 @@
                         name="duracao"
                         id="duracao"
                         min="1">
-
-                    <label for="duracao">
-                        Duração (minutos)
-                    </label>
+                    <label for="duracao">Duração (minutos)</label>
                 </div>
 
                 <div class="input-field">
@@ -86,21 +73,14 @@
                         id="orcamento"
                         min="0"
                         step="0.01">
-
-                    <label for="orcamento">
-                        Orçamento
-                    </label>
+                    <label for="orcamento">Orçamento</label>
                 </div>
 
-                <button
-                    type="submit"
-                    class="btn green">
+                <button type="submit" class="btn green">
                     Cadastrar
                 </button>
 
-                <a
-                    href="/ficha-tecnica"
-                    class="btn grey">
+                <a href="/ficha-tecnica" class="btn grey">
                     Voltar
                 </a>
 

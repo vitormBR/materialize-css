@@ -1,52 +1,57 @@
 <div class="container">
-    <h3>Lista de Filmes</h3>
+    <div class="page-header">
+        <h3>Filmes</h3>
+        <p>Filmes cadastrados no sistema.</p>
+    </div>
 
-    <a href="/filmes/cadastrar"
-       class="btn blue">
-        Cadastrar Filme
-    </a>
+    <div class="action-buttons">
+        <a href="/filmes/cadastrar" class="btn blue darken-2">
+            <i class="material-icons left">add</i>
+            Cadastrar Filme
+        </a>
+    </div>
 
-    <table class="striped highlight">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Ano</th>
-                <th>Duração</th>
-                <th>Gênero</th>
-                <th>Classificação</th>
-                <th>País de Origem</th>
-                <th>Diretor</th>
-                <th>Detalhes</th>
-            </tr>
-        </thead>
+    <div class="card table-card">
+        <table class="striped highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Ano</th>
+                    <th>Duração</th>
+                    <th>Gênero</th>
+                    <th>Classificação</th>
+                    <th>País</th>
+                    <th>Diretor</th>
+                    <th>Detalhes</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            {{#each filmes}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{titulo}}</td>
-                <td>{{ano}}</td>
-                <td>{{duracao}} minutos</td>
-                <td>{{genero}}</td>
-                <td>{{clasIndicativa}}</td>
-                <td>{{paisOrigem}}</td>
-                <td>{{diretor.nome}}</td>
-                <td>
-                    <a href="/filmes/{{id}}"
-                       class="btn-small blue">
-                        Visualizar
-                    </a>
-                </td>
-            </tr>
-
-            {{else}}
-            <tr>
-                <td colspan="9">
-                    Nenhum filme cadastrado.
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+            <tbody>
+                {{#each filmes}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td><b>{{titulo}}</b></td>
+                    <td>{{ano}}</td>
+                    <td>{{#if duracao}}{{duracao}} min{{else}}-{{/if}}</td>
+                    <td>{{genero}}</td>
+                    <td>{{clasIndicativa}}</td>
+                    <td>{{paisOrigem}}</td>
+                    <td>{{#if diretor}}{{diretor.nome}}{{else}}-{{/if}}</td>
+                    <td>
+                        <a href="/filmes/{{id}}" class="btn-small blue">
+                            <i class="material-icons">visibility</i>
+                        </a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="9" class="empty-state">
+                        Nenhum filme cadastrado.
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </div>

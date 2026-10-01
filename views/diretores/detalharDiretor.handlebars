@@ -1,58 +1,35 @@
 <div class="container">
-    <h3>Detalhes do Diretor</h3>
+    <div class="page-header">
+        <h3>Detalhes do Diretor</h3>
+        <p>Informações completas do diretor.</p>
+    </div>
 
     <div class="card">
         <div class="card-content">
+            <span class="card-title">{{diretor.nome}}</span>
 
-            <span class="card-title">
-                {{diretor.nome}}
-            </span>
-
-            <p>
-                <b>ID:</b> {{diretor.id}}
-            </p>
-
-            <p>
-                <b>Nome:</b> {{diretor.nome}}
-            </p>
-
-            <p>
-                <b>Foto:</b> {{diretor.foto}}
-            </p>
-
-            <p>
-                <b>Data de Nascimento:</b>
-                {{diretor.dataNascimento}}
-            </p>
-
-            <p>
-                <b>Biografia:</b>
-                {{diretor.biografia}}
-            </p>
-
-            <p>
-                <b>Nacionalidade:</b>
-                {{diretor.nacionalidade}}
-            </p>
+            <div class="detail-item"><div class="detail-label">ID</div><div class="detail-value">{{diretor.id}}</div></div>
+            <div class="detail-item"><div class="detail-label">Nome</div><div class="detail-value">{{diretor.nome}}</div></div>
+            <div class="detail-item"><div class="detail-label">Foto</div><div class="detail-value">{{diretor.foto}}</div></div>
+            <div class="detail-item"><div class="detail-label">Data de Nascimento</div><div class="detail-value">{{diretor.dataNascimento}}</div></div>
+            <div class="detail-item"><div class="detail-label">Biografia</div><div class="detail-value">{{diretor.biografia}}</div></div>
+            <div class="detail-item"><div class="detail-label">Nacionalidade</div><div class="detail-value">{{diretor.nacionalidade}}</div></div>
 
             <h5>Filmes dirigidos</h5>
-
             <ul class="collection">
                 {{#each diretor.filmes}}
-                <li class="collection-item">
-                    {{titulo}}
-                </li>
+                    <li class="collection-item">{{titulo}}</li>
                 {{else}}
-                <li class="collection-item">
-                    Nenhum filme cadastrado.
-                </li>
+                    <li class="collection-item">Nenhum filme cadastrado.</li>
                 {{/each}}
             </ul>
-
         </div>
     </div>
 
-    <a href="/diretores" class="btn blue">
-        Voltar
-    </a>
+    <div class="action-buttons">
+        <a href="/diretores" class="btn grey">
+            <i class="material-icons left">arrow_back</i>
+            Voltar
+        </a>
+    </div>
 </div>

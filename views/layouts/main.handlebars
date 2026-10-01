@@ -1,249 +1,234 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>{{titulo}} | CineManager</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<title>{{title}}</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-<!-- Materialize CSS -->
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
->
+    <style>
+        body {
+            background: #f5f7fa;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
 
-<!-- Material Icons -->
-<link
-    href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet"
->
+        main {
+            flex: 1 0 auto;
+        }
 
-<!-- CSS próprio -->
-<link rel="stylesheet" href="/css/style.css">
+        nav {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
 
+        .brand-logo {
+            font-weight: 600;
+        }
+
+        .page-header {
+            margin: 35px 0 25px;
+        }
+
+        .page-header h3 {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .page-header p {
+            color: #757575;
+        }
+
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-title {
+            font-weight: 500 !important;
+        }
+
+        .btn,
+        .btn-small {
+            border-radius: 6px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .table-card {
+            padding: 0 15px 15px;
+        }
+
+        table {
+            margin-top: 10px;
+        }
+
+        table th {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        table td {
+            vertical-align: middle;
+        }
+
+        .empty-state {
+            padding: 35px !important;
+            text-align: center;
+            color: #757575;
+        }
+
+        .detail-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #757575;
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            margin-top: 3px;
+            font-size: 1.05rem;
+        }
+
+        .hero {
+            margin-top: 45px;
+            padding: 55px 30px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            box-shadow: 0 8px 25px rgba(25, 118, 210, 0.25);
+        }
+
+        .hero h2 {
+            margin-top: 0;
+            font-weight: 500;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .home-card {
+            height: 100%;
+            border-radius: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .home-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .home-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .form-card {
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .form-card .card-content {
+            padding: 30px;
+        }
+
+        footer {
+            margin-top: 45px;
+        }
+
+        @media (max-width: 992px) {
+            .brand-logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="blue darken-3">
-
-    <div class="nav-wrapper container">
-
-        <a href="/" class="brand-logo">
-            CineWeb
-        </a>
-
-        <!-- Menu mobile -->
-        <a
-            href="#"
-            data-target="mobile-menu"
-            class="sidenav-trigger"
-        >
-            <i class="material-icons">menu</i>
-        </a>
-
-        <!-- Menu desktop -->
-        <ul class="right hide-on-med-and-down">
-
-            <li>
-                <a href="/">
-                    <i class="material-icons left">home</i>
-                    Início
+    <nav class="blue darken-2">
+        <div class="nav-wrapper">
+            <div class="container">
+                <a href="/" class="brand-logo">
+                    <i class="material-icons left">movie</i>
+                    CineManager
                 </a>
-            </li>
 
-            <li>
-                <a href="/filmes">
-                    Filmes
+                <a href="#" data-target="mobile-menu" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
                 </a>
-            </li>
 
-            <li>
-                <a href="/artistas">
-                    Artistas
-                </a>
-            </li>
-
-            <li>
-                <a href="/diretores">
-                    Diretores
-                </a>
-            </li>
-
-            <li>
-                <a href="/ficha-tecnica">
-                    Ficha Técnica
-                </a>
-            </li>
-
-        </ul>
-
-    </div>
-
-</nav>
-
-
-<!-- MENU MOBILE -->
-<ul class="sidenav" id="mobile-menu">
-
-    <li>
-        <a href="/">
-            <i class="material-icons">home</i>
-            Início
-        </a>
-    </li>
-
-    <li>
-        <a href="/filmes">
-            <i class="material-icons">movie</i>
-            Filmes
-        </a>
-    </li>
-
-    <li>
-        <a href="/artistas">
-            <i class="material-icons">person</i>
-            Artistas
-        </a>
-    </li>
-
-    <li>
-        <a href="/diretores">
-            <i class="material-icons">videocam</i>
-            Diretores
-        </a>
-    </li>
-
-    <li>
-        <a href="/ficha-tecnica">
-            <i class="material-icons">description</i>
-            Ficha Técnica
-        </a>
-    </li>
-
-</ul>
-
-
-<!-- CONTEÚDO DAS PÁGINAS -->
-<main class="container">
-
-    {{{body}}}
-
-</main>
-
-
-<!-- FOOTER -->
-<footer class="page-footer blue darken-3">
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col l6 s12">
-
-                <h5 class="white-text">
-                    CineWeb
-                </h5>
-
-                <p class="grey-text text-lighten-4">
-                    Sistema para gerenciamento de filmes,
-                    artistas, diretores e fichas técnicas.
-                </p>
-
-            </div>
-
-            <div class="col l4 offset-l2 s12">
-
-                <h5 class="white-text">
-                    Navegação
-                </h5>
-
-                <ul>
-
-                    <li>
-                        <a
-                            class="grey-text text-lighten-3"
-                            href="/filmes"
-                        >
-                            Filmes
-                        </a>
-                    </li>
-
-                    <li>
-                        <a
-                            class="grey-text text-lighten-3"
-                            href="/artistas"
-                        >
-                            Artistas
-                        </a>
-                    </li>
-
-                    <li>
-                        <a
-                            class="grey-text text-lighten-3"
-                            href="/diretores"
-                        >
-                            Diretores
-                        </a>
-                    </li>
-
-                    <li>
-                        <a
-                            class="grey-text text-lighten-3"
-                            href="/ficha-tecnica"
-                        >
-                            Ficha Técnica
-                        </a>
-                    </li>
-
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="/filmes">Filmes</a></li>
+                    <li><a href="/diretores">Diretores</a></li>
+                    <li><a href="/artistas">Artistas</a></li>
+                    <li><a href="/ficha-tecnica">Fichas Técnicas</a></li>
                 </ul>
-
             </div>
-
         </div>
+    </nav>
 
-    </div>
+    <ul class="sidenav" id="mobile-menu">
+        <li><a href="/"><i class="material-icons">home</i>Início</a></li>
+        <li><a href="/filmes"><i class="material-icons">movie</i>Filmes</a></li>
+        <li><a href="/diretores"><i class="material-icons">person</i>Diretores</a></li>
+        <li><a href="/artistas"><i class="material-icons">groups</i>Artistas</a></li>
+        <li><a href="/ficha-tecnica"><i class="material-icons">description</i>Fichas Técnicas</a></li>
+    </ul>
 
+    <main>
+        {{{body}}}
+    </main>
 
-    <div class="footer-copyright">
-
+    <footer class="page-footer blue darken-2">
         <div class="container">
-
-            © 2026 CineWeb
-
-            <span class="grey-text text-lighten-4 right">
-                Projeto acadêmico
-            </span>
-
+            <div class="row">
+                <div class="col s12">
+                    <h5>CineManager</h5>
+                    <p class="grey-text text-lighten-4">
+                        Sistema de gerenciamento de filmes.
+                    </p>
+                </div>
+            </div>
         </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Projeto CRUD
+            </div>
+        </div>
+    </footer>
 
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-</footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selects = document.querySelectorAll('select');
+            M.FormSelect.init(selects);
 
-
-<!-- Materialize JS -->
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
-</script>
-
-
-<!-- Inicialização do Materialize -->
-<script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-        M.AutoInit();
-
-    });
-
-</script>
+            const sidenavs = document.querySelectorAll('.sidenav');
+            M.Sidenav.init(sidenavs);
+        });
+    </script>
 
 </body>
-
 </html>

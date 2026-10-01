@@ -8,27 +8,21 @@ const FichaTecnica = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false
         },
-
         roteirista: {
             type: DataTypes.STRING
         },
-
         produtor: {
             type: DataTypes.STRING
         },
-
         compositor: {
             type: DataTypes.STRING
         },
-
         editor: {
             type: DataTypes.STRING
         },
-
         duracao: {
             type: DataTypes.INTEGER
         },
-
         orcamento: {
             type: DataTypes.DECIMAL(10, 2)
         }

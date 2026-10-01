@@ -1,7 +1,7 @@
-const Filme = require('./filme.js');
-const Artista = require('./artista.js');
-const FichaTecnica = require('./fichaTec.js');
-const Diretor = require('./diretor.js');
+const Filme = require('./filme');
+const Artista = require('./artista');
+const FichaTecnica = require('./fichaTec');
+const Diretor = require('./diretor');
 
 Filme.hasOne(FichaTecnica, {
     foreignKey: 'filmeId',
@@ -36,3 +36,10 @@ Artista.belongsToMany(Filme, {
     otherKey: 'filmeId',
     as: 'filmes'
 });
+
+module.exports = {
+    Filme,
+    Artista,
+    FichaTecnica,
+    Diretor
+};

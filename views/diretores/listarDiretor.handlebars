@@ -1,43 +1,49 @@
 <div class="container">
-    <h3>Lista de Diretores</h3>
+    <div class="page-header">
+        <h3>Diretores</h3>
+        <p>Diretores cadastrados no sistema.</p>
+    </div>
 
-    <a href="/diretores/cadastrar"
-       class="btn blue">
-        Cadastrar Diretor
-    </a>
+    <div class="action-buttons">
+        <a href="/diretores/cadastrar" class="btn blue darken-2">
+            <i class="material-icons left">add</i>
+            Cadastrar Diretor
+        </a>
+    </div>
 
-    <table class="striped highlight">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Nacionalidade</th>
-                <th>Data de Nascimento</th>
-                <th>Detalhes</th>
-            </tr>
-        </thead>
+    <div class="card table-card">
+        <table class="striped highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Nacionalidade</th>
+                    <th>Data de Nascimento</th>
+                    <th>Detalhes</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            {{#each diretores}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{nome}}</td>
-                <td>{{nacionalidade}}</td>
-                <td>{{dataNascimento}}</td>
-                <td>
-                    <a href="/diretores/{{id}}"
-                       class="btn-small blue">
-                        Visualizar
-                    </a>
-                </td>
-            </tr>
-            {{else}}
-            <tr>
-                <td colspan="5">
-                    Nenhum diretor cadastrado.
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+            <tbody>
+                {{#each diretores}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td><b>{{nome}}</b></td>
+                    <td>{{nacionalidade}}</td>
+                    <td>{{dataNascimento}}</td>
+                    <td>
+                        <a href="/diretores/{{id}}" class="btn-small blue">
+                            <i class="material-icons">visibility</i>
+                        </a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="5" class="empty-state">
+                        Nenhum diretor cadastrado.
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </div>

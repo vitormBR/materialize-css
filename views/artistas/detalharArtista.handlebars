@@ -1,66 +1,36 @@
 <div class="container">
-    <h3>Detalhes do Artista</h3>
+    <div class="page-header">
+        <h3>Detalhes do Artista</h3>
+        <p>Informações completas do artista.</p>
+    </div>
 
     <div class="card">
         <div class="card-content">
+            <span class="card-title">{{artista.nome}}</span>
 
-            <span class="card-title">
-                {{artista.nome}}
-            </span>
-
-            <p>
-                <b>ID:</b>
-                {{artista.id}}
-            </p>
-
-            <p>
-                <b>Nome:</b>
-                {{artista.nome}}
-            </p>
-
-            <p>
-                <b>Nacionalidade:</b>
-                {{artista.nacionalidade}}
-            </p>
-
-            <p>
-                <b>Data de Nascimento:</b>
-                {{artista.dataNascimento}}
-            </p>
-
-            <p>
-                <b>Biografia:</b>
-                {{artista.biografia}}
-            </p>
-
-            <p>
-                <b>Tipo:</b>
-                {{artista.tipo}}
-            </p>
-
-            <p>
-                <b>Papéis:</b>
-                {{artista.papeis}}
-            </p>
+            <div class="detail-item"><div class="detail-label">ID</div><div class="detail-value">{{artista.id}}</div></div>
+            <div class="detail-item"><div class="detail-label">Nome</div><div class="detail-value">{{artista.nome}}</div></div>
+            <div class="detail-item"><div class="detail-label">Nacionalidade</div><div class="detail-value">{{artista.nacionalidade}}</div></div>
+            <div class="detail-item"><div class="detail-label">Data de Nascimento</div><div class="detail-value">{{artista.dataNascimento}}</div></div>
+            <div class="detail-item"><div class="detail-label">Biografia</div><div class="detail-value">{{artista.biografia}}</div></div>
+            <div class="detail-item"><div class="detail-label">Tipo</div><div class="detail-value">{{artista.tipo}}</div></div>
+            <div class="detail-item"><div class="detail-label">Papéis</div><div class="detail-value">{{artista.papeis}}</div></div>
 
             <h5>Filmes</h5>
-
             <ul class="collection">
                 {{#each artista.filmes}}
-                <li class="collection-item">
-                    {{titulo}}
-                </li>
+                    <li class="collection-item">{{titulo}}</li>
                 {{else}}
-                <li class="collection-item">
-                    Nenhum filme cadastrado.
-                </li>
+                    <li class="collection-item">Nenhum filme cadastrado.</li>
                 {{/each}}
             </ul>
-
         </div>
     </div>
 
-    <a href="/artistas" class="btn blue">
-        Voltar
-    </a>
+    <div class="action-buttons">
+        <a href="/artistas" class="btn grey">
+            <i class="material-icons left">arrow_back</i>
+            Voltar
+        </a>
+    </div>
 </div>

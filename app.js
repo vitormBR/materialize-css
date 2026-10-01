@@ -1,30 +1,44 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-const sequelize = require('./config/bd');
-
-const artistas = require('./models/artista.js');
-const diretores = require('./models/diretor.js');
-const filmes = require('./models/filme.js');
-const fichasTecnicas = require('./models/fichaTec.js');
-const relacionamentos = require('./models/relacionamentos.js');
-
 const methodOverride = require('method-override');
 
-const app = express();
+const sequelize = require('./config/bd');
 
-app.use(methodOverride('_method'));
+const artistas = require('./models/artista');
+const diretores = require('./models/diretor');
+const filmes = require('./models/filme');
+const fichasTecnicas = require('./models/fichaTec');
+
+require('./models/relacionamentos');
+
+const app = express();
+const PORT = 3000;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method'));
 
-app.engine('handlebars', exphbs.engine({
-    defaultLayout: 'main'
-}));
+app.engine(
+    'handlebars',
+    exphbs.engine({
+        defaultLayout: 'main'
+    })
+);
 
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
+function toPlainArray(lista) {
+    return lista.map(item => item.toJSON());
+}
 
-// ==================== HOME ====================
+function toPlain(item) {
+    return item ? item.toJSON() : null;
+}
+
+/* =========================
+   HOME
+========================= */
 
 app.get('/', (req, res) => {
     res.render('home', {
@@ -32,50 +46,87 @@ app.get('/', (req, res) => {
     });
 });
 
+/* =========================
+   FILMES
+========================= */
 
-// ==================== FILMES ====================
 app.get('/filmes', async (req, res) => {
-    const listaFilmes = await filmes.findAll({
-        include: [
-            {
-                model: diretores,
-                as: 'diretor'
-            }
-        ]
-    });
+    try {
+        const lista = await filmes.findAll({
+            include: [
+                {
+                    model: diretores,
+                    as: 'diretor'
+                }
+            ],
+            order: [['id', 'ASC']]
+        });
 
-    res.render('filmes/listarFilme', {
-        titulo: 'Filmes',
-        filmes: listaFilmes
-    });
+        res.render('filmes/listarFilme', {
+            titulo: 'Filmes',
+            filmes: toPlainArray(lista)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
+    }
 });
-
 
 app.get('/filmes/cadastrar', async (req, res) => {
-    const listaDiretores = await diretores.findAll();
-    const listaArtistas = await artistas.findAll();
+    try {
+        const listaDiretores = await diretores.findAll({
+            order: [['nome', 'ASC']]
+        });
 
-    res.render('filmes/cadastrarFilme', {
-        titulo: 'Cadastrar Filme',
-        diretores: listaDiretores,
-        artistas: listaArtistas
-    });
+        const listaArtistas = await artistas.findAll({
+            order: [['nome', 'ASC']]
+        });
+
+        res.render('filmes/cadastrarFilme', {
+            titulo: 'Cadastrar Filme',
+            diretores: toPlainArray(listaDiretores),
+            artistas: toPlainArray(listaArtistas)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
+    }
 });
-
 
 app.post('/filmes', async (req, res) => {
     try {
-        console.log('Dados recebidos:', req.body);
+        const {
+            titulo,
+            ano,
+            sinopse,
+            duracao,
+            genero,
+            clasIndicativa,
+            paisOrigem,
+            diretorId
+        } = req.body;
+
+        if (!titulo || !titulo.trim()) {
+            return res.status(400).send('O título do filme é obrigatório.');
+        }
+
+        if (diretorId) {
+            const diretor = await diretores.findByPk(Number(diretorId));
+
+            if (!diretor) {
+                return res.status(400).send('O diretor selecionado não existe.');
+            }
+        }
 
         const filme = await filmes.create({
-            titulo: req.body.titulo,
-            ano: req.body.ano || null,
-            sinopse: req.body.sinopse || null,
-            duracao: req.body.duracao || null,
-            genero: req.body.genero || null,
-            clasIndicativa: req.body.clasIndicativa || null,
-            paisOrigem: req.body.paisOrigem || null,
-            diretorId: req.body.diretorId || null
+            titulo: titulo.trim(),
+            ano: ano ? Number(ano) : null,
+            sinopse: sinopse || null,
+            duracao: duracao ? Number(duracao) : null,
+            genero: genero || null,
+            clasIndicativa: clasIndicativa ? Number(clasIndicativa) : null,
+            paisOrigem: paisOrigem || null,
+            diretorId: diretorId ? Number(diretorId) : null
         });
 
         let artistasSelecionados = req.body.artistas || [];
@@ -84,12 +135,22 @@ app.post('/filmes', async (req, res) => {
             artistasSelecionados = [artistasSelecionados];
         }
 
+        artistasSelecionados = artistasSelecionados
+            .filter(valor => valor !== '')
+            .map(valor => Number(valor))
+            .filter(Number.isInteger);
+
         if (artistasSelecionados.length > 0) {
-            await filme.setArtistas(artistasSelecionados);
+            const artistasExistentes = await artistas.findAll({
+                where: {
+                    id: artistasSelecionados
+                }
+            });
+
+            await filme.setArtistas(artistasExistentes);
         }
 
         res.redirect('/filmes');
-
     } catch (erro) {
         console.error('ERRO AO CADASTRAR FILME:');
         console.error(erro);
@@ -97,128 +158,169 @@ app.post('/filmes', async (req, res) => {
     }
 });
 
-
 app.get('/filmes/:id', async (req, res) => {
-    const id = Number(req.params.id);
+    try {
+        const id = Number(req.params.id);
 
-    const filme = await filmes.findByPk(id, {
-        include: [
-            {
-                model: diretores,
-                as: 'diretor'
-            },
-            {
-                model: fichasTecnicas,
-                as: 'fichaTecnica'
-            },
-            {
-                model: artistas,
-                as: 'artistas'
-            }
-        ]
-    });
+        if (!Number.isInteger(id)) {
+            return res.status(400).send('ID de filme inválido.');
+        }
 
-    if (!filme) {
-        return res.status(404).send('Filme não encontrado');
+        const filme = await filmes.findByPk(id, {
+            include: [
+                {
+                    model: diretores,
+                    as: 'diretor'
+                },
+                {
+                    model: fichasTecnicas,
+                    as: 'fichaTecnica'
+                },
+                {
+                    model: artistas,
+                    as: 'artistas'
+                }
+            ]
+        });
+
+        if (!filme) {
+            return res.status(404).send('Filme não encontrado.');
+        }
+
+        res.render('filmes/detalharFilme', {
+            titulo: 'Detalhes do Filme',
+            filme: toPlain(filme)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
     }
-
-    res.render('filmes/detalharFilme', {
-        titulo: 'Detalhes do Filme',
-        filme: filme
-    });
 });
 
-
-// ==================== FICHAS TÉCNICAS ====================
+/* =========================
+   FICHA TÉCNICA
+========================= */
 
 app.get('/ficha-tecnica', async (req, res) => {
-    const listaFichas = await fichasTecnicas.findAll({
-        include: [
-            {
-                model: filmes,
-                as: 'filme'
-            }
-        ]
-    });
+    try {
+        const lista = await fichasTecnicas.findAll({
+            include: [
+                {
+                    model: filmes,
+                    as: 'filme'
+                }
+            ],
+            order: [['id', 'ASC']]
+        });
 
-    res.render('fichas/listarFichaTec', {
-        titulo: 'Ficha Técnica',
-        fichasTecnicas: listaFichas
-    });
+        res.render('fichas/listarFichaTec', {
+            titulo: 'Fichas Técnicas',
+            fichasTecnicas: toPlainArray(lista)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
+    }
 });
 
 app.get('/ficha-tecnica/cadastrar', async (req, res) => {
-    const listaFilmes = await filmes.findAll();
+    try {
+        const listaFilmes = await filmes.findAll({
+            order: [['titulo', 'ASC']]
+        });
 
-    res.render('fichas/cadastrarFichaTec', {
-        titulo: 'Cadastrar Ficha Técnica',
-        filmes: listaFilmes
-    });
+        res.render('fichas/cadastrarFichaTec', {
+            titulo: 'Cadastrar Ficha Técnica',
+            filmes: toPlainArray(listaFilmes)
+        });
+    } catch (erro) {
+        console.error('ERRO AO CARREGAR FILMES:');
+        console.error(erro);
+        res.status(500).send(erro.message);
+    }
 });
 
 app.post('/ficha-tecnica', async (req, res) => {
     try {
-        console.log('filmeId recebido:', req.body.filmeId);
+        const filmeId = Number(req.body.filmeId);
 
-        const filme = await filmes.findByPk(req.body.filmeId);
+        if (!Number.isInteger(filmeId) || filmeId <= 0) {
+            return res.status(400).send('Selecione um filme válido.');
+        }
+
+        const filme = await filmes.findByPk(filmeId);
 
         if (!filme) {
-            return res.status(400).send(
-                'O filme selecionado não existe no banco de dados.'
-            );
+            return res.status(400).send('O filme selecionado não existe no banco de dados.');
         }
 
         await fichasTecnicas.create({
-            filmeId: req.body.filmeId,
+            filmeId: filmeId,
             roteirista: req.body.roteirista || null,
             produtor: req.body.produtor || null,
             compositor: req.body.compositor || null,
             editor: req.body.editor || null,
-            duracao: req.body.duracao || null,
-            orcamento: req.body.orcamento || null
+            duracao: req.body.duracao ? Number(req.body.duracao) : null,
+            orcamento: req.body.orcamento ? Number(req.body.orcamento) : null
         });
 
         res.redirect('/ficha-tecnica');
-
     } catch (erro) {
         console.error('ERRO AO CADASTRAR FICHA TÉCNICA:');
         console.error(erro);
-
         res.status(500).send(erro.message);
     }
 });
 
 app.get('/ficha-tecnica/:id', async (req, res) => {
-    const id = Number(req.params.id);
+    try {
+        const id = Number(req.params.id);
 
-    const ficha = await fichasTecnicas.findByPk(id, {
-        include: [
-            {
-                model: filmes,
-                as: 'filme'
-            }
-        ]
-    });
+        if (!Number.isInteger(id)) {
+            return res.status(400).send('ID de ficha inválido.');
+        }
 
-    if (!ficha) {
-        return res.status(404).send('Ficha Técnica não encontrada');
+        const ficha = await fichasTecnicas.findByPk(id, {
+            include: [
+                {
+                    model: filmes,
+                    as: 'filme'
+                }
+            ]
+        });
+
+        if (!ficha) {
+            return res.status(404).send('Ficha Técnica não encontrada.');
+        }
+
+        res.render('fichas/detalharFichaTec', {
+            titulo: 'Detalhes da Ficha Técnica',
+            ficha: toPlain(ficha)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
     }
-
-    res.render('fichas/detalharFichaTec', {
-        titulo: 'Detalhes da Ficha Técnica',
-        ficha: ficha
-    });
 });
 
-// ==================== DIRETORES ====================
+/* =========================
+   DIRETORES
+========================= */
 
 app.get('/diretores', async (req, res) => {
-    const listaDiretores = await diretores.findAll();
+    try {
+        const lista = await diretores.findAll({
+            order: [['id', 'ASC']]
+        });
 
-    res.render('diretores/listarDiretor', {
-        titulo: 'Diretores',
-        diretores: listaDiretores
-    });
+        res.render('diretores/listarDiretor', {
+            titulo: 'Diretores',
+            diretores: toPlainArray(lista)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
+    }
 });
 
 app.get('/diretores/cadastrar', (req, res) => {
@@ -228,48 +330,75 @@ app.get('/diretores/cadastrar', (req, res) => {
 });
 
 app.post('/diretores', async (req, res) => {
-    await diretores.create({
-        nome: req.body.nome,
-        foto: req.body.foto,
-        dataNascimento: req.body.dataNascimento,
-        biografia: req.body.biografia,
-        nacionalidade: req.body.nacionalidade
-    });
+    try {
+        if (!req.body.nome || !req.body.nome.trim()) {
+            return res.status(400).send('O nome do diretor é obrigatório.');
+        }
 
-    res.redirect('/diretores');
+        await diretores.create({
+            nome: req.body.nome.trim(),
+            foto: req.body.foto || null,
+            dataNascimento: req.body.dataNascimento || null,
+            biografia: req.body.biografia || null,
+            nacionalidade: req.body.nacionalidade || null
+        });
+
+        res.redirect('/diretores');
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
+    }
 });
 
 app.get('/diretores/:id', async (req, res) => {
-    const id = Number(req.params.id);
+    try {
+        const id = Number(req.params.id);
 
-    const diretor = await diretores.findByPk(id, {
-        include: [
-            {
-                model: filmes,
-                as: 'filmes'
-            }
-        ]
-    });
+        if (!Number.isInteger(id)) {
+            return res.status(400).send('ID de diretor inválido.');
+        }
 
-    if (!diretor) {
-        return res.status(404).send('Diretor não encontrado');
+        const diretor = await diretores.findByPk(id, {
+            include: [
+                {
+                    model: filmes,
+                    as: 'filmes'
+                }
+            ]
+        });
+
+        if (!diretor) {
+            return res.status(404).send('Diretor não encontrado.');
+        }
+
+        res.render('diretores/detalharDiretor', {
+            titulo: 'Detalhes do Diretor',
+            diretor: toPlain(diretor)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
     }
-
-    res.render('diretores/detalharDiretor', {
-        titulo: 'Detalhes do Diretor',
-        diretor: diretor
-    });
 });
 
-// ==================== ARTISTAS ====================
+/* =========================
+   ARTISTAS
+========================= */
 
 app.get('/artistas', async (req, res) => {
-    const listaArtistas = await artistas.findAll();
+    try {
+        const lista = await artistas.findAll({
+            order: [['id', 'ASC']]
+        });
 
-    res.render('artistas/listarArtista', {
-        titulo: 'Artistas',
-        artistas: listaArtistas
-    });
+        res.render('artistas/listarArtista', {
+            titulo: 'Artistas',
+            artistas: toPlainArray(lista)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
+    }
 });
 
 app.get('/artistas/cadastrar', (req, res) => {
@@ -279,62 +408,77 @@ app.get('/artistas/cadastrar', (req, res) => {
 });
 
 app.post('/artistas', async (req, res) => {
-    await artistas.create({
-        nome: req.body.nome,
-        nacionalidade: req.body.nacionalidade,
-        dataNascimento: req.body.dataNascimento,
-        biografia: req.body.biografia,
-        tipo: req.body.tipo,
-        papeis: req.body.papeis
-    });
+    try {
+        if (!req.body.nome || !req.body.nome.trim()) {
+            return res.status(400).send('O nome do artista é obrigatório.');
+        }
 
-    res.redirect('/artistas');
+        await artistas.create({
+            nome: req.body.nome.trim(),
+            nacionalidade: req.body.nacionalidade || null,
+            dataNascimento: req.body.dataNascimento || null,
+            biografia: req.body.biografia || null,
+            tipo: req.body.tipo || null,
+            papeis: req.body.papeis || null
+        });
+
+        res.redirect('/artistas');
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
+    }
 });
 
 app.get('/artistas/:id', async (req, res) => {
-    const id = Number(req.params.id);
+    try {
+        const id = Number(req.params.id);
 
-    const artista = await artistas.findByPk(id, {
-        include: [
-            {
-                model: filmes,
-                as: 'filmes'
-            }
-        ]
-    });
+        if (!Number.isInteger(id)) {
+            return res.status(400).send('ID de artista inválido.');
+        }
 
-    if (!artista) {
-        return res.status(404).send('Artista não encontrado');
+        const artista = await artistas.findByPk(id, {
+            include: [
+                {
+                    model: filmes,
+                    as: 'filmes'
+                }
+            ]
+        });
+
+        if (!artista) {
+            return res.status(404).send('Artista não encontrado.');
+        }
+
+        res.render('artistas/detalharArtista', {
+            titulo: 'Detalhes do Artista',
+            artista: toPlain(artista)
+        });
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send(erro.message);
     }
-
-    res.render('artistas/detalharArtista', {
-        titulo: 'Detalhes do Artista',
-        artista: artista
-    });
 });
 
+/* =========================
+   BANCO E SERVIDOR
+========================= */
 
-// ==================== BANCO ====================
-
-async function conectarBD() {
+async function iniciar() {
     try {
-        await sequelize.sync({ alter: true });
+        await sequelize.authenticate();
+        console.log('Banco de dados conectado.');
 
-        console.log(
-            'Conexão com o banco de dados estabelecida com sucesso!'
-        );
+        await sequelize.sync({ alter: true });
+        console.log('Tabelas sincronizadas.');
+
+        app.listen(PORT, () => {
+            console.log(`Servidor executando em http://localhost:${PORT}`);
+        });
     } catch (erro) {
-        console.error(
-            'Erro ao conectar:',
-            erro
-        );
+        console.error('ERRO AO INICIAR A APLICAÇÃO:');
+        console.error(erro);
     }
 }
 
-conectarBD();
-
-app.listen(3000, () => {
-    console.log(
-        'Servidor executando em http://localhost:3000'
-    );
-});
+iniciar();
