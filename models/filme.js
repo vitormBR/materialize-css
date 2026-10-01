@@ -2,41 +2,45 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/bd');
 
 const Filme = sequelize.define(
-  'Filme', 
-  {
-    nome: {
-      type: DataTypes.STRING,
-    },
-    anoLancamento: {
-      type: DataTypes.INTEGER,
-    },
-    sinopse: {
-        type: DataTypes.STRING,
-    },
-    duracao: {
-        type: DataTypes.DATE,
-    },
-    genero: {
-        type: DataTypes.STRING,
-    },
-    clasIndicativa:{
-        type: DataTypes.INTEGER,
-    },
-    paisOrigem:{
-        type: DataTypes.STRING,
-    },
-    diretor: {
-        type: DataTypes.STRING,
-    },
-    elenco:{
-        type: DataTypes.STRING
-    }
+    'Filme',
+    {
+        titulo: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
 
-  },
-  {
-    tableName: 'Filmes',
-    timestamps: true
-  }
+        ano: {
+            type: DataTypes.INTEGER
+        },
+
+        sinopse: {
+            type: DataTypes.STRING
+        },
+
+        duracao: {
+            type: DataTypes.INTEGER
+        },
+
+        genero: {
+            type: DataTypes.STRING
+        },
+
+        clasIndicativa: {
+            type: DataTypes.INTEGER
+        },
+
+        paisOrigem: {
+            type: DataTypes.STRING
+        },
+
+        diretorId: {
+            type: DataTypes.INTEGER
+        }
+    },
+    {
+        tableName: 'Filmes',
+        timestamps: true
+    }
 );
 
 module.exports = Filme;

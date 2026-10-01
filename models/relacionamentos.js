@@ -1,7 +1,7 @@
-const filme = require('./filme.models');
-const Artista = require('./artista.models');
-const fichaTec = require('./fichaTec.moldes');
-const diretor = require('./diretor.moldes');
+const Filme = require('./filme.js');
+const Artista = require('./artista.js');
+const FichaTecnica = require('./fichaTec.js');
+const Diretor = require('./diretor.js');
 
 Filme.hasOne(FichaTecnica, {
     foreignKey: 'filmeId',
@@ -26,11 +26,13 @@ Filme.belongsTo(Diretor, {
 Filme.belongsToMany(Artista, {
     through: 'FilmeArtista',
     foreignKey: 'filmeId',
+    otherKey: 'artistaId',
     as: 'artistas'
 });
 
 Artista.belongsToMany(Filme, {
     through: 'FilmeArtista',
     foreignKey: 'artistaId',
+    otherKey: 'filmeId',
     as: 'filmes'
 });

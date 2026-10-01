@@ -1,4 +1,3 @@
-
 <div class="container">
     <h3>Cadastrar Filme</h3>
 
@@ -23,8 +22,7 @@
                     <input
                         type="number"
                         name="ano"
-                        id="ano"
-                        required>
+                        id="ano">
 
                     <label for="ano">
                         Ano
@@ -35,8 +33,7 @@
                     <textarea
                         name="sinopse"
                         id="sinopse"
-                        class="materialize-textarea">
-                    </textarea>
+                        class="materialize-textarea"></textarea>
 
                     <label for="sinopse">
                         Sinopse
@@ -44,11 +41,57 @@
                 </div>
 
                 <div class="input-field">
-                    <select name="diretorId"
-                            id="diretorId"
-                            required>
+                    <input
+                        type="number"
+                        name="duracao"
+                        id="duracao"
+                        min="1">
 
-                        <option value="" disabled selected>
+                    <label for="duracao">
+                        Duração (minutos)
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="text"
+                        name="genero"
+                        id="genero">
+
+                    <label for="genero">
+                        Gênero
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="number"
+                        name="clasIndicativa"
+                        id="clasIndicativa">
+
+                    <label for="clasIndicativa">
+                        Classificação indicativa
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="text"
+                        name="paisOrigem"
+                        id="paisOrigem">
+
+                    <label for="paisOrigem">
+                        País de origem
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <select name="diretorId" id="diretorId">
+
+                        <option
+                            value=""
+                            disabled
+                            selected>
                             Selecione um diretor
                         </option>
 
@@ -60,31 +103,7 @@
 
                     </select>
 
-                    <label for="diretorId">
-                        Diretor
-                    </label>
-                </div>
-
-                <div class="input-field">
-                    <select name="artistas"
-                            id="artistas"
-                            multiple>
-
-                        <option value="" disabled>
-                            Selecione os artistas
-                        </option>
-
-                        {{#each artistas}}
-                        <option value="{{id}}">
-                            {{nome}}
-                        </option>
-                        {{/each}}
-
-                    </select>
-
-                    <label for="artistas">
-                        Artistas
-                    </label>
+                    <label>Diretor</label>
                 </div>
 
                 <button
@@ -93,8 +112,9 @@
                     Cadastrar
                 </button>
 
-                <a href="/filmes"
-                   class="btn grey">
+                <a
+                    href="/filmes"
+                    class="btn grey">
                     Voltar
                 </a>
 

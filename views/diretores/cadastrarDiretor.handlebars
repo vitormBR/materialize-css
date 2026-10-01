@@ -1,12 +1,10 @@
-
 <div class="container">
     <h3>Cadastrar Diretor</h3>
 
     <div class="card">
         <div class="card-content">
 
-            <form action="/diretores"
-                  method="POST">
+            <form action="/diretores" method="POST">
 
                 <div class="input-field">
                     <input
@@ -15,8 +13,37 @@
                         id="nome"
                         required>
 
-                    <label for="nome">
-                        Nome
+                    <label for="nome">Nome</label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="text"
+                        name="foto"
+                        id="foto">
+
+                    <label for="foto">Foto</label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="date"
+                        name="dataNascimento"
+                        id="dataNascimento">
+
+                    <label class="active" for="dataNascimento">
+                        Data de nascimento
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <textarea
+                        name="biografia"
+                        id="biografia"
+                        class="materialize-textarea"></textarea>
+
+                    <label for="biografia">
+                        Biografia
                     </label>
                 </div>
 
@@ -24,8 +51,7 @@
                     <input
                         type="text"
                         name="nacionalidade"
-                        id="nacionalidade"
-                        required>
+                        id="nacionalidade">
 
                     <label for="nacionalidade">
                         Nacionalidade
@@ -38,12 +64,14 @@
                     Cadastrar
                 </button>
 
-                <a href="/diretores"
-                   class="btn grey">
+                <a
+                    href="/diretores"
+                    class="btn grey">
                     Voltar
                 </a>
 
             </form>
+
         </div>
     </div>
 </div>

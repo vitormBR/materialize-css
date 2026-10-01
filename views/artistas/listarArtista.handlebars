@@ -1,4 +1,3 @@
-
 <div class="container">
     <h3>Lista de Artistas</h3>
 
@@ -13,6 +12,9 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Nacionalidade</th>
+                <th>Data de Nascimento</th>
+                <th>Tipo</th>
+                <th>Papéis</th>
                 <th>Detalhes</th>
             </tr>
         </thead>
@@ -23,10 +25,20 @@
                 <td>{{id}}</td>
                 <td>{{nome}}</td>
                 <td>{{nacionalidade}}</td>
+                <td>{{dataNascimento}}</td>
+                <td>{{tipo}}</td>
+                <td>{{papeis}}</td>
                 <td>
-                    <a href="/artistas/{{id}}">
+                    <a href="/artistas/{{id}}"
+                       class="btn-small blue">
                         Visualizar
                     </a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="7">
+                    Nenhum artista cadastrado.
                 </td>
             </tr>
             {{/each}}

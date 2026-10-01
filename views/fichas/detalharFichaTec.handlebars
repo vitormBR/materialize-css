@@ -1,4 +1,3 @@
-
 <div class="container">
     <h3>Detalhes da Ficha Técnica</h3>
 
@@ -6,11 +5,12 @@
         <div class="card-content">
 
             <span class="card-title">
-                {{ficha.filme.titulo}}
+                Ficha Técnica
             </span>
 
             <p>
-                <b>ID:</b> {{ficha.id}}
+                <b>ID:</b>
+                {{ficha.id}}
             </p>
 
             <p>
@@ -19,19 +19,39 @@
             </p>
 
             <p>
+                <b>Roteirista:</b>
+                {{ficha.roteirista}}
+            </p>
+
+            <p>
+                <b>Produtor:</b>
+                {{ficha.produtor}}
+            </p>
+
+            <p>
+                <b>Compositor:</b>
+                {{ficha.compositor}}
+            </p>
+
+            <p>
+                <b>Editor:</b>
+                {{ficha.editor}}
+            </p>
+
+            <p>
                 <b>Duração:</b>
                 {{ficha.duracao}} minutos
             </p>
 
             <p>
-                <b>Ano:</b>
-                {{ficha.filme.ano}}
+                <b>Orçamento:</b>
+                {{ficha.orcamento}}
             </p>
 
         </div>
     </div>
 
-    <a href="/fichas" class="btn blue">
+    <a href="/ficha-tecnica" class="btn blue">
         Voltar
     </a>
 </div>

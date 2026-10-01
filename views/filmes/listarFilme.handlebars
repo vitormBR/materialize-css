@@ -1,4 +1,3 @@
-
 <div class="container">
     <h3>Lista de Filmes</h3>
 
@@ -13,6 +12,10 @@
                 <th>ID</th>
                 <th>Título</th>
                 <th>Ano</th>
+                <th>Duração</th>
+                <th>Gênero</th>
+                <th>Classificação</th>
+                <th>País de Origem</th>
                 <th>Diretor</th>
                 <th>Detalhes</th>
             </tr>
@@ -24,16 +27,22 @@
                 <td>{{id}}</td>
                 <td>{{titulo}}</td>
                 <td>{{ano}}</td>
+                <td>{{duracao}} minutos</td>
+                <td>{{genero}}</td>
+                <td>{{clasIndicativa}}</td>
+                <td>{{paisOrigem}}</td>
                 <td>{{diretor.nome}}</td>
                 <td>
-                    <a href="/filmes/{{id}}">
+                    <a href="/filmes/{{id}}"
+                       class="btn-small blue">
                         Visualizar
                     </a>
                 </td>
             </tr>
+
             {{else}}
             <tr>
-                <td colspan="5">
+                <td colspan="9">
                     Nenhum filme cadastrado.
                 </td>
             </tr>

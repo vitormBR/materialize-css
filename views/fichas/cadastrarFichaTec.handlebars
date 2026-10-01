@@ -1,33 +1,69 @@
-
 <div class="container">
     <h3>Cadastrar Ficha Técnica</h3>
 
     <div class="card">
         <div class="card-content">
 
-            <form action="/fichas"
-                  method="POST">
+            <form
+                action="/ficha-tecnica"
+                method="POST">
+
+<div class="input-field">
+    <select name="filmeId" id="filmeId" required>
+        <option value="" disabled selected>
+            Selecione um filme
+        </option>
+
+        {{#each filmes}}
+            <option value="{{id}}">
+                {{titulo}}
+            </option>
+        {{/each}}
+    </select>
+
+    <label for="filmeId">Filme</label>
+</div>
+                <div class="input-field">
+                    <input
+                        type="text"
+                        name="roteirista"
+                        id="roteirista">
+
+                    <label for="roteirista">
+                        Roteirista
+                    </label>
+                </div>
 
                 <div class="input-field">
-                    <select name="filmeId"
-                            id="filmeId"
-                            required>
+                    <input
+                        type="text"
+                        name="produtor"
+                        id="produtor">
 
-                        <option value=""
-                                disabled selected>
-                            Selecione um filme
-                        </option>
+                    <label for="produtor">
+                        Produtor
+                    </label>
+                </div>
 
-                        {{#each filmes}}
-                        <option value="{{id}}">
-                            {{titulo}}
-                        </option>
-                        {{/each}}
+                <div class="input-field">
+                    <input
+                        type="text"
+                        name="compositor"
+                        id="compositor">
 
-                    </select>
+                    <label for="compositor">
+                        Compositor
+                    </label>
+                </div>
 
-                    <label for="filmeId">
-                        Filme
+                <div class="input-field">
+                    <input
+                        type="text"
+                        name="editor"
+                        id="editor">
+
+                    <label for="editor">
+                        Editor
                     </label>
                 </div>
 
@@ -36,11 +72,23 @@
                         type="number"
                         name="duracao"
                         id="duracao"
-                        min="1"
-                        required>
+                        min="1">
 
                     <label for="duracao">
                         Duração (minutos)
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="number"
+                        name="orcamento"
+                        id="orcamento"
+                        min="0"
+                        step="0.01">
+
+                    <label for="orcamento">
+                        Orçamento
                     </label>
                 </div>
 
@@ -50,8 +98,9 @@
                     Cadastrar
                 </button>
 
-                <a href="/fichas"
-                   class="btn grey">
+                <a
+                    href="/ficha-tecnica"
+                    class="btn grey">
                     Voltar
                 </a>
 

@@ -1,12 +1,10 @@
-
 <div class="container">
     <h3>Cadastrar Artista</h3>
 
     <div class="card">
         <div class="card-content">
 
-            <form action="/artistas"
-                  method="POST">
+            <form action="/artistas" method="POST">
 
                 <div class="input-field">
                     <input
@@ -15,20 +13,61 @@
                         id="nome"
                         required>
 
-                    <label for="nome">
-                        Nome
-                    </label>
+                    <label for="nome">Nome</label>
                 </div>
 
                 <div class="input-field">
                     <input
                         type="text"
                         name="nacionalidade"
-                        id="nacionalidade"
-                        required>
+                        id="nacionalidade">
 
                     <label for="nacionalidade">
                         Nacionalidade
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="date"
+                        name="dataNascimento"
+                        id="dataNascimento">
+
+                    <label class="active" for="dataNascimento">
+                        Data de nascimento
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <textarea
+                        name="biografia"
+                        id="biografia"
+                        class="materialize-textarea"></textarea>
+
+                    <label for="biografia">
+                        Biografia
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <input
+                        type="text"
+                        name="tipo"
+                        id="tipo">
+
+                    <label for="tipo">
+                        Tipo
+                    </label>
+                </div>
+
+                <div class="input-field">
+                    <textarea
+                        name="papeis"
+                        id="papeis"
+                        class="materialize-textarea"></textarea>
+
+                    <label for="papeis">
+                        Papéis
                     </label>
                 </div>
 
@@ -38,12 +77,14 @@
                     Cadastrar
                 </button>
 
-                <a href="/artistas"
-                   class="btn grey">
+                <a
+                    href="/artistas"
+                    class="btn grey">
                     Voltar
                 </a>
 
             </form>
+
         </div>
     </div>
 </div>

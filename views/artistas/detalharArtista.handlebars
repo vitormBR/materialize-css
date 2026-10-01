@@ -1,4 +1,3 @@
-
 <div class="container">
     <h3>Detalhes do Artista</h3>
 
@@ -10,12 +9,38 @@
             </span>
 
             <p>
-                <b>ID:</b> {{artista.id}}
+                <b>ID:</b>
+                {{artista.id}}
+            </p>
+
+            <p>
+                <b>Nome:</b>
+                {{artista.nome}}
             </p>
 
             <p>
                 <b>Nacionalidade:</b>
                 {{artista.nacionalidade}}
+            </p>
+
+            <p>
+                <b>Data de Nascimento:</b>
+                {{artista.dataNascimento}}
+            </p>
+
+            <p>
+                <b>Biografia:</b>
+                {{artista.biografia}}
+            </p>
+
+            <p>
+                <b>Tipo:</b>
+                {{artista.tipo}}
+            </p>
+
+            <p>
+                <b>Papéis:</b>
+                {{artista.papeis}}
             </p>
 
             <h5>Filmes</h5>
@@ -24,6 +49,10 @@
                 {{#each artista.filmes}}
                 <li class="collection-item">
                     {{titulo}}
+                </li>
+                {{else}}
+                <li class="collection-item">
+                    Nenhum filme cadastrado.
                 </li>
                 {{/each}}
             </ul>

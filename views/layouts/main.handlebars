@@ -1,25 +1,249 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Sistema de Filmes</title>
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{title}}</title>
+
+<!-- Materialize CSS -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+>
+
+<!-- Material Icons -->
+<link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+>
+
+<!-- CSS próprio -->
+<link rel="stylesheet" href="/css/style.css">
+
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<nav class="blue darken-3">
+
+    <div class="nav-wrapper container">
+
+        <a href="/" class="brand-logo">
+            CineWeb
+        </a>
+
+        <!-- Menu mobile -->
+        <a
+            href="#"
+            data-target="mobile-menu"
+            class="sidenav-trigger"
+        >
+            <i class="material-icons">menu</i>
+        </a>
+
+        <!-- Menu desktop -->
+        <ul class="right hide-on-med-and-down">
+
+            <li>
+                <a href="/">
+                    <i class="material-icons left">home</i>
+                    Início
+                </a>
+            </li>
+
+            <li>
+                <a href="/filmes">
+                    Filmes
+                </a>
+            </li>
+
+            <li>
+                <a href="/artistas">
+                    Artistas
+                </a>
+            </li>
+
+            <li>
+                <a href="/diretores">
+                    Diretores
+                </a>
+            </li>
+
+            <li>
+                <a href="/ficha-tecnica">
+                    Ficha Técnica
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+
+<!-- MENU MOBILE -->
+<ul class="sidenav" id="mobile-menu">
+
+    <li>
+        <a href="/">
+            <i class="material-icons">home</i>
+            Início
+        </a>
+    </li>
+
+    <li>
+        <a href="/filmes">
+            <i class="material-icons">movie</i>
+            Filmes
+        </a>
+    </li>
+
+    <li>
+        <a href="/artistas">
+            <i class="material-icons">person</i>
+            Artistas
+        </a>
+    </li>
+
+    <li>
+        <a href="/diretores">
+            <i class="material-icons">videocam</i>
+            Diretores
+        </a>
+    </li>
+
+    <li>
+        <a href="/ficha-tecnica">
+            <i class="material-icons">description</i>
+            Ficha Técnica
+        </a>
+    </li>
+
+</ul>
+
+
+<!-- CONTEÚDO DAS PÁGINAS -->
+<main class="container">
+
     {{{body}}}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            M.AutoInit();
-        });
-    </script>
+
+<!-- FOOTER -->
+<footer class="page-footer blue darken-3">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col l6 s12">
+
+                <h5 class="white-text">
+                    CineWeb
+                </h5>
+
+                <p class="grey-text text-lighten-4">
+                    Sistema para gerenciamento de filmes,
+                    artistas, diretores e fichas técnicas.
+                </p>
+
+            </div>
+
+            <div class="col l4 offset-l2 s12">
+
+                <h5 class="white-text">
+                    Navegação
+                </h5>
+
+                <ul>
+
+                    <li>
+                        <a
+                            class="grey-text text-lighten-3"
+                            href="/filmes"
+                        >
+                            Filmes
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            class="grey-text text-lighten-3"
+                            href="/artistas"
+                        >
+                            Artistas
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            class="grey-text text-lighten-3"
+                            href="/diretores"
+                        >
+                            Diretores
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            class="grey-text text-lighten-3"
+                            href="/ficha-tecnica"
+                        >
+                            Ficha Técnica
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-copyright">
+
+        <div class="container">
+
+            © 2026 CineWeb
+
+            <span class="grey-text text-lighten-4 right">
+                Projeto acadêmico
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- Materialize JS -->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+</script>
+
+
+<!-- Inicialização do Materialize -->
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        M.AutoInit();
+
+    });
+
+</script>
 
 </body>
+
 </html>

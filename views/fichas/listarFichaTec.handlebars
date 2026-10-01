@@ -1,8 +1,7 @@
-
 <div class="container">
     <h3>Lista de Fichas Técnicas</h3>
 
-    <a href="/fichas/cadastrar"
+    <a href="/ficha-tecnica/cadastrar"
        class="btn blue">
         Cadastrar Ficha Técnica
     </a>
@@ -12,26 +11,38 @@
             <tr>
                 <th>ID</th>
                 <th>Filme</th>
+                <th>Roteirista</th>
+                <th>Produtor</th>
+                <th>Compositor</th>
+                <th>Editor</th>
                 <th>Duração</th>
+                <th>Orçamento</th>
                 <th>Detalhes</th>
             </tr>
         </thead>
 
         <tbody>
-            {{#each fichas}}
+            {{#each fichasTecnicas}}
             <tr>
                 <td>{{id}}</td>
                 <td>{{filme.titulo}}</td>
+                <td>{{roteirista}}</td>
+                <td>{{produtor}}</td>
+                <td>{{compositor}}</td>
+                <td>{{editor}}</td>
                 <td>{{duracao}} minutos</td>
+                <td>{{orcamento}}</td>
                 <td>
-                    <a href="/fichas/{{id}}">
+                    <a href="/ficha-tecnica/{{id}}"
+                       class="btn-small blue">
                         Visualizar
                     </a>
                 </td>
             </tr>
+
             {{else}}
             <tr>
-                <td colspan="4">
+                <td colspan="9">
                     Nenhuma ficha cadastrada.
                 </td>
             </tr>
